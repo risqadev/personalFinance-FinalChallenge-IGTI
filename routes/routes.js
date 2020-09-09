@@ -1,8 +1,14 @@
 const express = require('express');
-const { getTransactions, errorHandler } = require('../services/transactionService');
+const { errorHandler, getEntries, postEntry, deleteEntry, putEntry } = require('../services/transactionService');
 const transactionRouter = express.Router();
 
-transactionRouter.get('/', getTransactions);
+transactionRouter.get('/', getEntries);
+
+transactionRouter.post('/', postEntry);
+
+transactionRouter.delete('/:id', deleteEntry);
+
+transactionRouter.put('/:id', putEntry);
 
 // tratamento de erros
 transactionRouter.use(errorHandler);
