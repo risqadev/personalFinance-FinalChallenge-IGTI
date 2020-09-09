@@ -1,10 +1,5 @@
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Types.ObjectId;
-
-// Aqui havia um erro difícil de pegar. Importei como "transactionModel",
-// com "t" minúsculo. No Windows, isso não faz diferença. Mas como no Heroku
-// o servidor é Linux, isso faz diferença. Gastei umas boas horas tentando
-// descobrir esse erro :-/
 const transactionModel = require('../models/transactionModel');
 
 // obter lançamentos de um período
@@ -28,6 +23,7 @@ async function getEntries(request, response, next) {
   }
 }
 
+// criar novo lançamento
 async function postEntry(request, response, next) {
   try {
     const { description, value, category, date, type } = request.body;
@@ -57,22 +53,7 @@ async function postEntry(request, response, next) {
   }
 }
 
-async function deleteEntry(request, response, next) {
-  const { id } = request.params;
-
-  try {
-    if (!id) {
-      throw new Error('Id não informado.');
-    }
-
-    await transactionModel.findByIdAndDelete(ObjectId(id));
-
-    response.send(204);
-  } catch (error) {
-    return next(error);
-  }
-}
-
+// editar um lançamento
 async function putEntry(request, response, next) {
   try {
     const { _id } = request.params;
@@ -103,21 +84,22 @@ async function putEntry(request, response, next) {
   }
 }
 
-/* async function postEntry(request, response, next) {
-  const req = request.origin;
-  
+// remover um lançamento
+async function deleteEntry(request, response, next) {
+  const { id } = request.params;
+
   try {
-    if () {
-      throw new Error('message');
+    if (!id) {
+      throw new Error('Id não informado.');
     }
 
-    const data = await transactionModel.method();
+    await transactionModel.findByIdAndDelete(ObjectId(id));
 
-    response.send(data);
+    response.send(204);
   } catch (error) {
     return next(error);
   }
-} */
+}
 
 // tratamento de erros
 function errorHandler(error, request, response, _next) {
