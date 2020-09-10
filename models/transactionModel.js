@@ -9,7 +9,7 @@ let schema = mongoose.Schema({
     type: Number,
     validate: {
       validator: (v) => v > 0,
-      message: 'Valor deve ser maior que 0.'
+      message: 'must be greater than 0'
     },
     required: true
   },

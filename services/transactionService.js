@@ -11,11 +11,11 @@ async function getEntries(request, response, next) {
       throw new Error('Informe o período no formato yyyy-mm.')
     }
 
-    const entries = await transactionModel.find({ yearMonth });
-
-    if (entries.length === 0) {
-      throw new Error(`Não foram encontrados lançamentos para o período informado (${yearMonth}).`)
-    }
+    const entries = await transactionModel
+      .find({ yearMonth })
+      .orFail(new Error(
+        `Não foram encontrados lançamentos para o período informado (${yearMonth}).`
+      ));
 
     response.send(entries);
   } catch (error) {
@@ -29,8 +29,10 @@ async function postEntry(request, response, next) {
     const { description, value, category, date, type } = request.body;
     const [year, month, day] = date.split('-');
 
-    if ((value <= 0) || !description || !category || !date || !type) {
-      throw new Error('Campos obrigatórios não informados ou valor não é maior que 0.');
+    if (!value || !description || !category || !date || !type) {
+      throw new Error(
+        'Campos obrigatórios não informados ou valor não é maior que 0.'
+      );
     }
 
     const newEntry = {
@@ -56,14 +58,14 @@ async function postEntry(request, response, next) {
 // editar um lançamento
 async function putEntry(request, response, next) {
   try {
-    const { id: _id } = request.params;
+    const { id } = request.params;
     const { description, value, category, date, type } = request.body;
     const [year, month, day] = date.split('-');
 
-    console.log(_id);
-
-    if ((value <= 0) || !description || !category || !date || !type) {
-      throw new Error('Campos obrigatórios não informados ou valor não é maior que 0.');
+    if (!value || !description || !category || !date || !type) {
+      throw new Error(
+        'Campos obrigatórios não informados ou valor não é maior que 0.'
+      );
     }
 
     const newEntry = {
@@ -77,10 +79,12 @@ async function putEntry(request, response, next) {
       yearMonthDay: date,
       yearMonth: `${year}-${month}`
     };
-    // const entryUpdated = await transactionModel.findOne({ _id });
-    const entryUpdated = await transactionModel.replaceOne({ _id }, newEntry, { new: true });
 
-    response.send(entryUpdated);
+    const savedEntry = await transactionModel
+      .findByIdAndUpdate(ObjectId(id), newEntry, { new: true })
+      .orFail();
+
+    response.send(savedEntry);
   } catch (error) {
     return next(error);
   }
@@ -95,7 +99,9 @@ async function deleteEntry(request, response, next) {
       throw new Error('Id não informado.');
     }
 
-    await transactionModel.deleteOne(ObjectId(id));
+    await transactionModel
+      .findByIdAndDelete(ObjectId(id))
+      .orFail();
 
     response.sendStatus(204);
   } catch (error) {
