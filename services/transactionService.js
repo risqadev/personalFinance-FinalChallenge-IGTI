@@ -56,9 +56,11 @@ async function postEntry(request, response, next) {
 // editar um lançamento
 async function putEntry(request, response, next) {
   try {
-    const { _id } = request.params;
+    const { id: _id } = request.params;
     const { description, value, category, date, type } = request.body;
     const [year, month, day] = date.split('-');
+
+    console.log(_id);
 
     if ((value <= 0) || !description || !category || !date || !type) {
       throw new Error('Campos obrigatórios não informados ou valor não é maior que 0.');
@@ -75,10 +77,10 @@ async function putEntry(request, response, next) {
       yearMonthDay: date,
       yearMonth: `${year}-${month}`
     };
+    // const entryUpdated = await transactionModel.findOne({ _id });
+    const entryUpdated = await transactionModel.replaceOne({ _id }, newEntry, { new: true });
 
-    const savedEntry = await transactionModel.findByIdAndUpdate(ObjectId(_id), newEntry, { new: true });
-
-    response.send(savedEntry);
+    response.send(entryUpdated);
   } catch (error) {
     return next(error);
   }
@@ -93,9 +95,9 @@ async function deleteEntry(request, response, next) {
       throw new Error('Id não informado.');
     }
 
-    await transactionModel.findByIdAndDelete(ObjectId(id));
+    await transactionModel.deleteOne(ObjectId(id));
 
-    response.send(204);
+    response.sendStatus(204);
   } catch (error) {
     return next(error);
   }
