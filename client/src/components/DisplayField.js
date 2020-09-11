@@ -1,8 +1,10 @@
 import React from 'react';
 
-export default function InfoField({ description, value }) {
+import 'materialize-css/dist/css/materialize.min.css';
+
+export default function DisplayField({ description, value }) {
   return (
-    <div>
+    <div className="col m3">
       <span id="fieldName">{description}: </span>
       <span id="fieldValue">{value}</span>
     </div>
