@@ -11,13 +11,17 @@ async function getEntries(request, response, next) {
       throw new Error('Informe o período no formato yyyy-mm.')
     }
 
+    const periods = await transactionModel.distinct('yearMonth');
+
     const entries = await transactionModel
       .find({ yearMonth })
       .orFail(new Error(
         `Não foram encontrados lançamentos para o período informado (${yearMonth}).`
       ));
 
-    response.send(entries);
+    const entriesAndPeriods = { periods, entries }
+
+    response.send(entriesAndPeriods);
   } catch (error) {
     return next(error);
   }
