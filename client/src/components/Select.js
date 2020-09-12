@@ -1,24 +1,25 @@
 import React from 'react';
-import M from "materialize-css";
-import 'materialize-css/dist/css/materialize.min.css';
+// MATERIALIZE JAVASCRIPT CAUSOU PROBLEMA NA ATUALIZAÇÃO
+// import M from "materialize-css";DO SELECT
 
-export default function Select({ currentItem, allItens, onChange }) {
+export default function Select({ selectedItem, items, onChange }) {
   const handlePeriodChange = ({ target: { value } }) => {
     onChange(value);
   }
 
-  React.useEffect(() => {
-    M.AutoInit();
-  }, []);
+  // MATERIALIZE JAVASCRIPT CAUSOU PROBLEMA NA ATUALIZAÇÃO
+  // React.useEffect(() => {
+  //   M.AutoInit();
+  // }, []);
 
   return (
-    <div className="input-field col">
-      <select className="center-align"
-        value={currentItem}
+    <div className="col">
+      <select className="browser-default input-field"
+        value={selectedItem}
         onChange={handlePeriodChange}>
-        {allItens.map(item => {
+        {items.map((item, index) => {
           return (
-            <option key={item} value={item}>{item}</option>
+            <option key={index} value={item}>{item}</option>
           )
         })}
       </select>
