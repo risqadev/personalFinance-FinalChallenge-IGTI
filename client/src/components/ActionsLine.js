@@ -1,12 +1,13 @@
 import React from 'react';
-import ActionNewEntry from './ActionNewEntry';
 import ActionSearch from './ActionSearch';
+// import ActionNewEntry from './ActionNewEntry';
+import ModalReact from './ModalReact';
 
-export default function ActionsLine() {
+export default function ActionsLine({ onSaveNew, onSearch, isEditing }) {
   return (
     <div className="row">
-      <ActionNewEntry />
-      <ActionSearch />
+      <ModalReact onSave={onSaveNew} isEditing={isEditing} />
+      <ActionSearch onSearch={onSearch} />
     </div>
   )
 }

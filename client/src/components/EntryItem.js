@@ -1,4 +1,5 @@
 import React from 'react';
+import { formatBRL } from '../helpers/formatter';
 import './components.css';
 
 export default function EntryItem({ item, returnAction }) {
@@ -16,10 +17,11 @@ export default function EntryItem({ item, returnAction }) {
     <div className="row valign-wrapper">
       <div className="col">{day}</div>
       <div className="col">
-        <div /* className="col" */>{typeName}</div>
+        <div /* className="col" */ style={{ fontWeight: 'bold' }}>{typeName}</div>
         <div /* className="col" */>{description}</div>
       </div>
-      <div className="col">{value}</div>
+      <div style={{ margin: '0 auto' }}></div>
+      <div className="col" style={{ fontWeight: 'bold' }}>{formatBRL(value)}</div>
       <span
         id={_id}
         className="material-icons clickable"

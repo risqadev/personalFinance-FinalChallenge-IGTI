@@ -10,9 +10,9 @@ export default function Selector({ selectedItem, items, onChange }) {
   return (
     <div className="center">
       <div className="valign-wrapper">
-        <Button onClick={handleButtonClick}>&lt;</Button>
+        <Button addClasses="" onClick={handleButtonClick}>&lt;</Button>
         <Select selectedItem={selectedItem} items={items} onChange={onChange} />
-        <Button onClick={handleButtonClick}>&gt;</Button>
+        <Button addClasses="" onClick={handleButtonClick}>&gt;</Button>
       </div>
     </div>
   )
