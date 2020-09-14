@@ -1,11 +1,14 @@
 import React from 'react';
 
-export default function Button({ children, className, dataTarget, onClick }) {
+export default function Button({ id, value, className, dataTarget, disabled, onClick, children }) {
   return (
     <button
-      className={`btn waves-effect waves-light col ${className}`}
+      id={id}
+      value={value}
+      className={className || ''}
       data-target={dataTarget}
       onClick={onClick}
+      disabled={disabled}
     >
       {children}
     </button>

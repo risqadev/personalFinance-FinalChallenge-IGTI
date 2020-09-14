@@ -1,6 +1,8 @@
 import React from 'react';
 import { formatBRL } from '../helpers/formatter';
+import Button from './Button';
 import './components.css';
+import Icon from './Icon';
 
 export default function EntryItem({ item, returnAction }) {
   const { _id, day, type, description, value } = item;
@@ -22,21 +24,29 @@ export default function EntryItem({ item, returnAction }) {
       </div>
       <div style={{ margin: '0 auto' }}></div>
       <div className="col" style={{ fontWeight: 'bold' }}>{formatBRL(value)}</div>
-      <span
-        id={_id}
-        className="material-icons clickable"
+
+      <Button
+        className="btn-flat waves-effect waves-teal _action-icon"
         onClick={handleActionClick}
       >
-        edit
-      </span>
-      <span
-        id={_id}
-        action="delete"
-        className="material-icons clickable"
+        <Icon
+          id={_id}
+        >
+          edit
+        </Icon>
+      </Button>
+
+      <Button
+        className="btn-flat waves-effect waves-teal _action-icon"
         onClick={handleActionClick}
       >
-        delete
-      </span>
+        <Icon
+          id={_id}
+        >
+          delete
+        </Icon>
+      </Button>
+
     </div>
   )
 }

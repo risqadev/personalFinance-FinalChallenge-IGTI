@@ -1,0 +1,5 @@
+.clickable {
+  display: block;
+  cursor: pointer;
+  margin-left: 10px;
+}

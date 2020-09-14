@@ -2,14 +2,18 @@ import React from 'react';
 import DisplayField from './DisplayField';
 
 import 'materialize-css/dist/css/materialize.min.css';
+import { formatBRL } from '../helpers/formatter';
 
-export default function DisplayLine({ countEntries, income, expenses, balance }) {
+export default function DisplayLine({ calculations, otherInfos }) {
   return (
-    <div className="row">
-      <DisplayField description="Lançamentos" value={countEntries} />
-      <DisplayField description="Receitas" value={income} />
-      <DisplayField description="Despesas" value={expenses} />
-      <DisplayField description="Saldo" value={balance} />
-    </div>
+    <>
+      <div className="row">
+        <DisplayField description="Lançamentos" value={calculations.count} />
+        <DisplayField description="Receitas" value={formatBRL(calculations.income)} />
+        <DisplayField description="Despesas" value={formatBRL(calculations.expenses)} />
+        <DisplayField description="Saldo" value={formatBRL(calculations.balance)} />
+      </div>
+      <p>{otherInfos}</p>
+    </>
   )
 }

@@ -5,7 +5,6 @@ import DisplayLine from './components/DisplayLine';
 import EntriesList from './components/EntriesList';
 import ModalReact from './components/ModalReact';
 import ActionSearch from './components/ActionSearch';
-import { formatBRL } from './helpers/formatter';
 // import Modal from 'react-modal';
 // import ActionsLine from './components/ActionsLine';
 // import Button from './components/Button';
@@ -15,13 +14,19 @@ import { formatBRL } from './helpers/formatter';
 export default function App() {
   console.log('App() excope');
 
-  const [currentPeriod, setCurrentPeriod] = useState('2020-09');
+  // const [currentPeriod, setCurrentPeriod] = useState(
+  //   new Date().toISOString().substring(0, 7)
+  // );
+  const [allPeriods, setAllPeriods] = useState({
+    currentValue: new Date().toISOString().substring(0, 7),
+    currentIndex: 0,
+    list: []
+  });
   const [periodEntries, setPeriodEntries] = useState([]);
   const [filteredEntries, setFilteredEntries] = useState([]);
-  const [allPeriods, setAllPeriods] = useState(['2020-09']);
   const [searchInput, setSearchInput] = useState(null);
-
-  const [modalIsOpen, setIsOpen] = React.useState(false);
+  const [calculations, setCalculations] = useState({});
+  const [modalIsOpen, setIsOpen] = useState(false);
 
   // const [isEditing, setIsEditing] = useState({
   //   status: false,
@@ -39,13 +44,23 @@ export default function App() {
     }
   });
 
-  const countEntries = useRef(0);
-  const incomeSum = useRef(0);
-  const expensesSum = useRef(0);
-  const balance = useRef(0);
+  // const countEntries = useRef(0);
+  // const incomeSum = useRef(0);
+  // const expensesSum = useRef(0);
+  // const balance = useRef(0);
 
-  const handleChangeSelector = (selected) => {
-    setCurrentPeriod(selected);
+  const handleSelector = ({ target: { tagName, value, selectedIndex } }) => {
+
+    const selected =
+      tagName === 'SELECT'
+        ? { currentValue: value, currentIndex: selectedIndex }
+        : value === '<'
+          ? { currentValue: allPeriods.list[--allPeriods.currentIndex] }
+          : { currentValue: allPeriods.list[++allPeriods.currentIndex] };
+
+    // console.log(selected);
+    // setCurrentPeriod(selected);
+    setAllPeriods({ ...allPeriods, ...selected });
   }
 
   const handleItemAction = (action, id) => {
@@ -99,7 +114,7 @@ export default function App() {
     try {
       const { data } = await api.post('transaction', entry);
 
-      if (data.yearMonth === currentPeriod) {
+      if (data.yearMonth === allPeriods.currentValue) {
         const entries = [...periodEntries, data]
           .sort((item, next) => item.day - next.day);
 
@@ -128,7 +143,7 @@ export default function App() {
     try {
       const { data } = await api.put(`transaction/${entry._id}`, entry);
 
-      if (data.yearMonth === currentPeriod) {
+      if (data.yearMonth === allPeriods.currentValue) {
         const entries = [...periodEntries];
         const index = entries.findIndex(entry => entry._id === data._id);
 
@@ -144,39 +159,61 @@ export default function App() {
     }
   }
 
-  const calculateInfos = () => {
-    // console.log('calculeteInfos() excope');
+  // const calculateInfos = () => {
+  //   // console.log('calculeteInfos() excope');
 
-    countEntries.current = filteredEntries.length;
+  //   countEntries.current = filteredEntries.length;
 
-    incomeSum.current = filteredEntries
-      .filter(({ type }) => type === '+')
-      .reduce((accumullator, { value }) => accumullator += value, 0);
+  //   incomeSum.current = filteredEntries
+  //     .filter(({ type }) => type === '+')
+  //     .reduce((accumullator, { value }) => accumullator += value, 0);
 
-    expensesSum.current = filteredEntries
-      .filter(({ type }) => type === '-')
-      .reduce((accumullator, { value }) => accumullator += value, 0);
+  //   expensesSum.current = filteredEntries
+  //     .filter(({ type }) => type === '-')
+  //     .reduce((accumullator, { value }) => accumullator += value, 0);
 
-    balance.current = incomeSum.current - expensesSum.current;
-  };
-  calculateInfos();
+  //   balance.current = incomeSum.current - expensesSum.current;
+  // };
+  // calculateInfos();
   // useEffect(calculateInfos, [periodEntries]);
 
   useEffect(() => {
     const getPeriodEntries = async () => {
-      const { data: { entries, periods } } = await api.get(`transaction/?period=${currentPeriod}`);
+      const { data: { entries, periods } } = await api.get(`transaction/?period=${allPeriods.currentValue}`);
 
       entries.sort((item, next) => item.day - next.day);
+      periods.sort((item, next) => item.localeCompare(next));
+
+      const currentIndex = periods.findIndex(item => item === allPeriods.currentValue);
 
       setPeriodEntries([...entries]);
       setFilteredEntries([...entries]);
-      setAllPeriods([...periods]);
+
+      setAllPeriods({ ...allPeriods, currentIndex, list: [...periods] });
     };
 
     getPeriodEntries();
 
     setFilteredEntries([]);
-  }, [currentPeriod]);
+  }, []);
+
+
+  useEffect(() => {
+    const count = filteredEntries.length;
+    const income = filteredEntries
+      .filter(({ type }) => type === '+')
+      .reduce((accumullator, { value }) => accumullator += value, 0);
+    const expenses = filteredEntries
+      .filter(({ type }) => type === '-')
+      .reduce((accumullator, { value }) => accumullator += value, 0)
+
+    setCalculations({
+      count,
+      income,
+      expenses,
+      balance: income - expenses
+    })
+  }, [filteredEntries]);
 
 
   function openModal() {
@@ -208,20 +245,17 @@ export default function App() {
 
   return (
     <div className="container">
-      <h2 className="center">Desafio Final do Bootcamp Full Stack</h2>
-      <h1 className="center">Gerenciador Financeiro Pessoal</h1>
+      {/* <h2 className="center">Desafio Final do Bootcamp Full Stack</h2> */}
+      <h1 className="center">Gerenciador Financeiro</h1>
 
       <Selector
-        selectedItem={currentPeriod}
         items={allPeriods}
-        onChange={handleChangeSelector}
+        onChange={handleSelector}
       />
 
       <DisplayLine
-        countEntries={countEntries.current}
-        income={formatBRL(incomeSum.current)}
-        expenses={formatBRL(expensesSum.current)}
-        balance={formatBRL(balance.current)}
+        calculations={calculations}
+        otherInfos={`${allPeriods.currentValue}, index: ${allPeriods.currentIndex}`}
       />
 
       {/* <ActionsLine onSaveNew={handleSaveNew} onSearch={handleSearch} isEditing={isEditing} /> */}
@@ -237,6 +271,12 @@ export default function App() {
         items={filteredEntries}
         returnAction={handleItemAction}
       />
+
+      {/* <Footer className="page-footer"> */}
+      <div className="page-footer">
+        <span className="page-footer footer-copyright">copyright</span>
+      </div>
+      {/* </Footer> */}
 
     </div>
   );

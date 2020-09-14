@@ -1,5 +1,22 @@
-.clickable {
+._action-icon {
   display: block;
   cursor: pointer;
-  margin-left: 10px;
+  margin-left: 15px;
+}
+
+._period-selector {
+  margin: 20px;
+  justify-content: center;
+}
+
+._period-select {
+  font-size: 18px;
+  width: auto;
+  margin: 0 20px;
+  padding-right: 20px;
+  padding-left: 20px
+}
+
+._flex-center {
+  /* justify-content: center; */
 }

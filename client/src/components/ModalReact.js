@@ -3,6 +3,7 @@ import React from 'react';
 import Modal from 'react-modal';
 import Button from './Button';
 import Form from './Form';
+import Icon from './Icon';
 
 const customStyles = {
   overlay: {
@@ -45,7 +46,12 @@ export default function ModalReact({ onSave, openModal, closeModal, modalIsOpen,
 
   return (
     <div>
-      <Button onClick={openModal}>+ Novo lançamento</Button>
+      <Button
+        className="btn waves-effect waves-light"
+        onClick={openModal}
+      >
+        + Novo lançamento
+      </Button>
 
       <Modal
         isOpen={modalIsOpen}
@@ -60,11 +66,11 @@ export default function ModalReact({ onSave, openModal, closeModal, modalIsOpen,
           Adicionar lançamento
         </h4>
 
-        <Button className="red"
-          onClick={closeModal}>
-          <i className="material-icons">
-            close
-          </i>
+        <Button
+          className="btn waves-effect waves-light red"
+          onClick={closeModal}
+        >
+          <Icon>close</Icon>
         </Button>
 
         <Form onSubmit={onSave} isEditing={isEditing} />
