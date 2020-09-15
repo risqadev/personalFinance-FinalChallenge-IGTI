@@ -22,7 +22,7 @@ const customStyles = {
 // Make sure to bind modal to your appElement (http://reactcommunity.org/react-modal/accessibility/)
 Modal.setAppElement('#root');
 
-export default function ModalReact({ onSave, openModal, closeModal, modalIsOpen, setIsOpen, isEditing }) {
+export default function ModalReact({ buttonClasses, openModal, closeModal, modalIsOpen, setIsOpen, isEditing, onSave }) {
   let subtitle;
 
   // const [modalIsOpen, setIsOpen] = React.useState(false);
@@ -45,9 +45,9 @@ export default function ModalReact({ onSave, openModal, closeModal, modalIsOpen,
   // }
 
   return (
-    <div>
+    <>
       <Button
-        className="btn waves-effect waves-light"
+        className={buttonClasses || ''}
         onClick={openModal}
       >
         + Novo lançamento
@@ -76,7 +76,7 @@ export default function ModalReact({ onSave, openModal, closeModal, modalIsOpen,
         <Form onSubmit={onSave} isEditing={isEditing} />
 
       </Modal>
-    </div>
+    </>
   );
 }
 

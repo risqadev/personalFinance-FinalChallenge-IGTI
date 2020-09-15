@@ -1,14 +1,15 @@
 import React from 'react';
 
-export default function ActionSearch({ searchInput, onChange }) {
+export default function ActionSearch({ className, searchInput, onChange }) {
   return (
-    <div className="col" style={{ width: '70%' }}>
+    <div className={' ' + className || ''}>
+      <label htmlFor="find">Localizar</label>
       <input
-        // value={searchInput}
+        // value={findInput}
         type="text"
-        name="search"
-        id="search"
-        className="input-field"
+        name="find"
+        id="find"
+        /* className="input-field" */
         onChange={onChange}
       />
     </div>
