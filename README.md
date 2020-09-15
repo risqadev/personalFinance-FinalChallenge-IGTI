@@ -1,4 +1,4 @@
-### Personal Finance
+# Personal Finance
 
 A Personal Finance app with React.js, Node.js and MongoDB.
 
