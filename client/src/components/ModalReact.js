@@ -33,7 +33,7 @@ export default function ModalReact({ onSave, openModal, closeModal, modalIsOpen,
 
   function afterOpenModal() {
     // references are now sync'd and can be accessed.
-    console.log(isEditing.status)
+
     if (isEditing.status === true) {
       subtitle.innerText = 'Editar lançamento';
     };

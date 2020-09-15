@@ -8,10 +8,14 @@ export default function Form({ onSubmit, isEditing }) {
     M.AutoInit();
   }, [])
 
+  // console.log(isEditing);
+
   const [entry, setEntry] = React.useState({
     ...isEditing.entry,
     date: isEditing.entry.yearMonthDay || isEditing.entry.date
   });
+
+  // console.log(entry);
 
   const handleInputChange = ({ currentTarget: { name, value } }) => {
     setEntry({
@@ -111,7 +115,7 @@ export default function Form({ onSubmit, isEditing }) {
             <div /* className="input-field col s6" */>
               <label htmlFor="date">Data</label>
               <input
-                value={entry.date || ""}
+                value={entry.date}
                 name="date"
                 id="date"
                 type="date"
