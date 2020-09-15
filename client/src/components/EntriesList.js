@@ -1,7 +1,7 @@
 import React from 'react';
 import EntryItem from './EntryItem';
 
-export default function EntriesList({ items, returnAction }) {
+export default function EntriesList({ items, onClick }) {
   return (
     <div>
       {items.map((item) => {
@@ -9,7 +9,7 @@ export default function EntriesList({ items, returnAction }) {
           <EntryItem
             key={item._id}
             item={item}
-            returnAction={returnAction}
+            onClick={onClick}
           />
         )
       })}

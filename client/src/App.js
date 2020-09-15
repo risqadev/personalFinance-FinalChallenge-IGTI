@@ -38,81 +38,6 @@ export default function App() {
   const [modalIsOpen, setIsOpen] = useState(false);
 
 
-  const handleSelector = ({ target: { tagName, value, selectedIndex, innerText } }) => {
-    const selected =
-      tagName === 'SELECT'
-        ? {
-          value,
-          index: selectedIndex
-        }
-        : innerText === 'chevron_left'
-          ? {
-            value: allPeriods.current[currentPeriod.index - 1],
-            index: currentPeriod.index - 1
-          }
-          : innerText === 'chevron_right'
-            ? {
-              value: allPeriods.current[currentPeriod.index + 1],
-              index: currentPeriod.index + 1
-            }
-            : {};
-
-    setCurrentPeriod({ ...selected });
-  }
-
-  const handleItemAction = (action, id) => {
-    action === 'edit' && editItem(id);
-    action === 'delete' && deleteEntry(id);
-  }
-
-  const handleSave = (entry) => {
-    isEditing.current.status === false
-      ? postEntry(entry)
-      : putEntry(entry);
-
-    closeModal();
-
-    setSearchInput(null);
-  }
-
-  const handleSearch = ({ target: { value } }) => {
-    console.log('handleSearch ' + value);
-
-    setSearchInput(value);
-
-    const filter = periodEntries.current.filter(entry =>
-      entry.description.includes(value)
-    );
-
-    setFilteredEntries([...filter]);
-  }
-
-  const editItem = (id) => {
-    isEditing.current = {
-      status: true,
-      entry: periodEntries.current.find(entry => entry._id === id)
-    };
-
-    openModal();
-  }
-
-  const openModal = () => {
-    setIsOpen(true);
-  }
-
-  const closeModal = () => {
-    setIsOpen(false);
-
-    isEditing.current = {
-      status: false,
-      entry: {
-        type: '-',
-        date: yearMonthDay
-      }
-    };
-  }
-
-
   const postEntry = async (entry) => {
 
     try {
@@ -167,6 +92,82 @@ export default function App() {
     } catch (error) {
       console.log(error.message);
     }
+  }
+
+
+  const editItem = (id) => {
+    isEditing.current = {
+      status: true,
+      entry: periodEntries.current.find(entry => entry._id === id)
+    };
+
+    openModal();
+  }
+
+  const openModal = () => {
+    setIsOpen(true);
+  }
+
+  const closeModal = () => {
+    setIsOpen(false);
+
+    isEditing.current = {
+      status: false,
+      entry: {
+        type: '-',
+        date: yearMonthDay
+      }
+    };
+  }
+
+
+  const handleSelector = ({ tagName, value, selectedIndex }) => {
+    const selected =
+      tagName === 'SELECT'
+        ? {
+          value,
+          index: selectedIndex
+        }
+        : value === '<'
+          ? {
+            value: allPeriods.current[currentPeriod.index - 1],
+            index: currentPeriod.index - 1
+          }
+          : value === '>'
+            ? {
+              value: allPeriods.current[currentPeriod.index + 1],
+              index: currentPeriod.index + 1
+            }
+            : {};
+
+    setCurrentPeriod({ ...selected });
+  }
+
+  const handleItemClick = ({ id, value }) => {
+    value === 'edit' && editItem(id);
+    value === 'delete' && deleteEntry(id);
+  }
+
+  const handleSave = (entry) => {
+    isEditing.current.status === false
+      ? postEntry(entry)
+      : putEntry(entry);
+
+    closeModal();
+
+    setSearchInput(null);
+  }
+
+  const handleSearch = ({ target: { value } }) => {
+    console.log('handleSearch ' + value);
+
+    setSearchInput(value);
+
+    const filter = periodEntries.current.filter(entry =>
+      entry.description.includes(value)
+    );
+
+    setFilteredEntries([...filter]);
   }
 
 
@@ -243,12 +244,12 @@ export default function App() {
 
         <ModalReact onSave={handleSave} openModal={openModal} closeModal={closeModal} modalIsOpen={modalIsOpen} setIsOpen={setIsOpen} isEditing={isEditing.current} />
 
-        {<ActionSearch searchInput={searchInput} onChange={handleSearch} />}
+        <ActionSearch searchInput={searchInput} onChange={handleSearch} />
       </div>
 
       <EntriesList
         items={filteredEntries}
-        returnAction={handleItemAction}
+        onClick={handleItemClick}
       />
 
       {/* <Footer className="page-footer"> */}

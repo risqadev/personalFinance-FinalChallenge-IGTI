@@ -12,6 +12,10 @@ export default function Selector({ items, onChange }) {
         ? 'superior'
         : 'in';
 
+  const handleChange = ({ currentTarget }) => {
+    onChange(currentTarget);
+  }
+
   return (
     <div className="valign-wrapper _flex-center _period-selector">
 
@@ -19,7 +23,7 @@ export default function Selector({ items, onChange }) {
         value="<"
         className="btn waves-effect waves-light"
         disabled={limitButton === 'inferior'}
-        onClick={onChange}
+        onClick={handleChange}
       >
         <Icon>chevron_left</Icon>
       </Button>
@@ -27,14 +31,14 @@ export default function Selector({ items, onChange }) {
       <Select
         className="browser-default input-field _period-select"
         items={items}
-        onChange={onChange}
+        onChange={handleChange}
       />
 
       <Button
         value=">"
         className="btn waves-effect waves-light"
         disabled={limitButton === 'superior'}
-        onClick={onChange}
+        onClick={handleChange}
       >
         <Icon>chevron_right</Icon>
       </Button>

@@ -4,15 +4,15 @@ import Button from './Button';
 import './components.css';
 import Icon from './Icon';
 
-export default function EntryItem({ item, returnAction }) {
+export default function EntryItem({ item, onClick }) {
   const { _id, day, type, description, value } = item;
   const typeName =
     (type === '+') ? 'Receita' :
       (type === '-') ? 'Despesa' :
         'Error';
 
-  const handleActionClick = ({ target: { id, innerText: action } }) => {
-    returnAction(action, id);
+  const handleClick = ({ currentTarget }) => {
+    onClick(currentTarget);
   }
 
   return (
@@ -26,25 +26,21 @@ export default function EntryItem({ item, returnAction }) {
       <div className="col" style={{ fontWeight: 'bold' }}>{formatBRL(value)}</div>
 
       <Button
+        id={_id}
+        value="edit"
         className="btn-flat waves-effect waves-teal _action-icon"
-        onClick={handleActionClick}
+        onClick={handleClick}
       >
-        <Icon
-          id={_id}
-        >
-          edit
-        </Icon>
+        <Icon>edit</Icon>
       </Button>
 
       <Button
+        id={_id}
+        value="delete"
         className="btn-flat waves-effect waves-teal _action-icon"
-        onClick={handleActionClick}
+        onClick={handleClick}
       >
-        <Icon
-          id={_id}
-        >
-          delete
-        </Icon>
+        <Icon>delete</Icon>
       </Button>
 
     </div>
