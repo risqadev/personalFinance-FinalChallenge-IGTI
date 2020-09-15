@@ -1,12 +1,7 @@
 import React from 'react';
-import M from "materialize-css";
 import Button from './Button';
-import 'materialize-css/dist/css/materialize.min.css';
 
 export default function Form({ onSubmit, isEditing }) {
-  React.useEffect(() => {
-    M.AutoInit();
-  }, [])
 
   // console.log(isEditing);
 
@@ -39,10 +34,6 @@ export default function Form({ onSubmit, isEditing }) {
 
       onSubmit(entry);
 
-      // setEntry({
-      //   type: '-',
-      //   date: '2020-09-13'
-      // });
     } catch (error) {
       alertElement.innerText = error.message;
     }
@@ -80,7 +71,7 @@ export default function Form({ onSubmit, isEditing }) {
         </div>
 
         <div>
-          <div /* className="input-field" */>
+          <div className="input-field">
             <label htmlFor="description">Descrição</label>
             <input
               value={entry.description || ""}
@@ -90,7 +81,7 @@ export default function Form({ onSubmit, isEditing }) {
               onChange={handleInputChange} />
           </div>
 
-          <div /* className="input-field" */>
+          <div className="input-field">
             <label htmlFor="category">Categoria</label>
             <input
               value={entry.category || ""}
@@ -101,7 +92,7 @@ export default function Form({ onSubmit, isEditing }) {
           </div>
 
           <div className="row">
-            <div /* className="input-field col s6" */>
+            <div className="input-field col s6">
               <label htmlFor="value">Valor</label>
               <input
                 value={entry.value || ""}
@@ -112,7 +103,7 @@ export default function Form({ onSubmit, isEditing }) {
               />
             </div>
 
-            <div /* className="input-field col s6" */>
+            <div className="input-field col s6">
               <label htmlFor="date">Data</label>
               <input
                 value={entry.date}
