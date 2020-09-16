@@ -50,7 +50,8 @@ export default function ModalReact({ buttonClasses, openModal, closeModal, modal
         className={buttonClasses || ''}
         onClick={openModal}
       >
-        + Novo lançamento
+        {/* <Icon>add</Icon> */}
+        <b>+</b> Novo lançamento
       </Button>
 
       <Modal

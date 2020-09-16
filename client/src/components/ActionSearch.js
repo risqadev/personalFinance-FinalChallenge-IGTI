@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function ActionSearch({ className, searchInput, onChange }) {
   return (
-    <div className={' ' + className || ''}>
+    <div className={'' + className || ''}>
       <label htmlFor="find">Localizar</label>
       <input
         // value={findInput}

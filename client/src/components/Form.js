@@ -94,7 +94,7 @@ export default function Form({ onSubmit, isEditing }) {
           <div className="row">
             <div className="input-field col s6">
               <label htmlFor="value">Valor</label>
-              <input
+              <input className=""
                 value={entry.value || ""}
                 name="value"
                 type="number"
@@ -104,7 +104,7 @@ export default function Form({ onSubmit, isEditing }) {
             </div>
 
             <div className="input-field col s6">
-              <label htmlFor="date">Data</label>
+              <label className="hide" htmlFor="date">Data</label>
               <input
                 value={entry.date}
                 name="date"

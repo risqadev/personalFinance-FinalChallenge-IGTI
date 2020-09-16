@@ -21,7 +21,7 @@ export default function Selector({ items, onChange }) {
 
       <Button
         value="<"
-        className="btn waves-effect waves-light"
+        className="btn waves-effect waves-light _btn"
         disabled={limitButton === 'inferior'}
         onClick={handleChange}
       >
@@ -29,14 +29,14 @@ export default function Selector({ items, onChange }) {
       </Button>
 
       <Select
-        className="browser-default input-field _period-select"
+        className=""
         items={items}
         onChange={handleChange}
       />
 
       <Button
         value=">"
-        className="btn waves-effect waves-light"
+        className="btn waves-effect waves-light _btn"
         disabled={limitButton === 'superior'}
         onClick={handleChange}
       >

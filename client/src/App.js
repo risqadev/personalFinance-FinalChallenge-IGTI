@@ -241,24 +241,23 @@ export default function App() {
 
       {/* <ActionsLine onSaveNew={handleSaveNew} onSearch={handleSearch} isEditing={isEditing} /> */}
 
-      <div className="row valign-wrapper">
+      <div className="row">
 
         <ModalReact
-          buttonClasses="btn waves-effect waves-light col s12 m6 l3"
+          buttonClasses="btn waves-effect waves-light col s12 m6 l4 _btn"
           isEditing={isEditing.current} onSave={handleSave}
           openModal={openModal} closeModal={closeModal}
           modalIsOpen={modalIsOpen} setIsOpen={setIsOpen} />
 
         <ActionSearch
-          className="col s12 m6 l9 input-field"
+          className="col s12 m6 l8 input-field"
           searchInput={searchInput} onChange={handleSearch} />
 
       </div>
 
       <EntriesList
         items={filteredEntries}
-        onClick={handleItemClick}
-      />
+        onClick={handleItemClick} />
 
       {/* <Footer className="page-footer"> */}
       <div className="page-footer">
