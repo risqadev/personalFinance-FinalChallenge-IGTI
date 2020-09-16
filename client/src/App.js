@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, /* useCallback, useMemo, useReduce */ } from 'react';
+import M from "materialize-css";
 import api from './services/api';
 import Selector from './components/Selector';
 import DisplayLine from './components/DisplayLine';
@@ -242,15 +243,21 @@ export default function App() {
 
       <div className="row">
 
-        <ModalReact onSave={handleSave} openModal={openModal} closeModal={closeModal} modalIsOpen={modalIsOpen} setIsOpen={setIsOpen} isEditing={isEditing.current} />
+        <ModalReact
+          buttonClasses="btn waves-effect waves-light col s12 m6 l4 _btn"
+          isEditing={isEditing.current} onSave={handleSave}
+          openModal={openModal} closeModal={closeModal}
+          modalIsOpen={modalIsOpen} setIsOpen={setIsOpen} />
 
-        <ActionSearch searchInput={searchInput} onChange={handleSearch} />
+        <ActionSearch
+          className="col s12 m6 l8 input-field"
+          searchInput={searchInput} onChange={handleSearch} />
+
       </div>
 
       <EntriesList
         items={filteredEntries}
-        onClick={handleItemClick}
-      />
+        onClick={handleItemClick} />
 
       {/* <Footer className="page-footer"> */}
       <div className="page-footer">
