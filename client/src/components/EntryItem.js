@@ -1,29 +1,33 @@
 import React from 'react';
 import { formatBRL } from '../helpers/formatter';
 import Button from './Button';
-import './components.css';
+
 import Icon from './Icon';
 
-export default function EntryItem({ item, onClick }) {
+export default function EntryItem({ className, item, previousDay, onClick }) {
   const { _id, day, type, description, value } = item;
-  const typeName =
-    (type === '+') ? 'Receita' :
-      (type === '-') ? 'Despesa' :
-        'Error';
+  const typeProps =
+    (type === '+')
+      ? { name: 'Receita', cssClass: '_income' }
+      : (type === '-')
+        ? { name: 'Despesa', cssClass: '_expense' }
+        : 'Error';
 
   const handleClick = ({ currentTarget }) => {
     onClick(currentTarget);
   }
 
+
   return (
-    <div className="row valign-wrapper">
-      <div className="col">{day}</div>
+    <div className={
+      `${className} ${typeProps.cssClass} ${day !== previousDay && '_days-space'}`
+    }>
+      <div className="col _entry-day">{day}</div>
       <div className="col">
-        <div /* className="col" */ style={{ fontWeight: 'bold' }}>{typeName}</div>
-        <div /* className="col" */>{description}</div>
+        <div className="_entry-description" >{description}</div>
+        <div className="_entry-type">{typeProps.name}</div>
       </div>
-      <div style={{ margin: '0 auto' }}></div>
-      <div className="col" style={{ fontWeight: 'bold' }}>{formatBRL(value)}</div>
+      <div className="col _entry-value">{formatBRL(value)}</div>
 
       <Button
         id={_id}
@@ -37,7 +41,7 @@ export default function EntryItem({ item, onClick }) {
       <Button
         id={_id}
         value="delete"
-        className="btn-flat waves-effect waves-teal _action-icon"
+        className="btn-flat waves-effect waves-teal red-text _action-icon"
         onClick={handleClick}
       >
         <Icon>delete</Icon>
