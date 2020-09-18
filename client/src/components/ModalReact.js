@@ -7,9 +7,10 @@ import Icon from './Icon';
 
 const customStyles = {
   overlay: {
-    zIndex: 10,
+    zIndex: 1,
   },
   content: {
+    width: '60%',
     top: '50%',
     left: '50%',
     right: 'auto',
@@ -34,9 +35,10 @@ export default function ModalReact({ buttonClasses, openModal, closeModal, modal
   function afterOpenModal() {
     // references are now sync'd and can be accessed.
 
-    if (isEditing.status === true) {
-      subtitle.innerText = 'Editar lançamento';
-    };
+    subtitle.innerText = (isEditing.status === true
+      && 'Editar lançamento')
+      || 'Adicionar lançamento';
+
     subtitle.style.color = '#f00';
   }
 
@@ -61,18 +63,22 @@ export default function ModalReact({ buttonClasses, openModal, closeModal, modal
         style={customStyles}
         contentLabel="Edit-Insert-Modal"
       >
-        <h4
-          className=""
-          ref={_subtitle => (subtitle = _subtitle)}>
-          Adicionar lançamento
-        </h4>
 
-        <Button
-          className="btn waves-effect waves-light red"
-          onClick={closeModal}
+        <div
+          className="row valign-wrapper"
         >
-          <Icon>close</Icon>
-        </Button>
+          <h4
+            className="col _editor-modal-title"
+            ref={_subtitle => (subtitle = _subtitle)}>.</h4>
+
+          <Button
+            className="btn waves-effect waves-light red"
+            onClick={closeModal}
+          >
+            <Icon>close</Icon>
+          </Button>
+        </div>
+
 
         <Form onSubmit={onSave} isEditing={isEditing} />
 

@@ -3,8 +3,6 @@ import Button from './Button';
 
 export default function Form({ onSubmit, isEditing }) {
 
-  // console.log(isEditing);
-
   const [entry, setEntry] = React.useState({
     ...isEditing.entry,
     date: isEditing.entry.yearMonthDay || isEditing.entry.date
@@ -43,8 +41,8 @@ export default function Form({ onSubmit, isEditing }) {
     <div>
 
       <form onSubmit={handleSubmit}>
-        <div>
-          <label>
+        <div className="row">
+          <label className="col s12 m12 l6 center">
             <input
               value="+"
               name="type"
@@ -52,59 +50,87 @@ export default function Form({ onSubmit, isEditing }) {
               type="radio"
               checked={entry.type === '+'}
               onChange={handleInputChange} />
-            <span>
+            <span className="_type-radio">
               Receita
-          </span>
+            </span>
           </label>
-          <label>
+          <label className="col s12 m12 l6 center">
             <input
               value="-"
               name="type"
               id="typeExpense"
               type="radio"
               checked={entry.type === '-'}
-              onChange={handleInputChange} />
-            <span>
+              onChange={handleInputChange}
+            />
+            <span className="_type-radio">
               Despesa
           </span>
           </label>
-        </div>
 
-        <div>
-          <div className="input-field">
-            <label htmlFor="description">Descrição</label>
-            <input
-              value={entry.description || ""}
-              name="description"
-              id="description"
-              type="text"
-              onChange={handleInputChange} />
-          </div>
+          <div>
+            <div className="col s12 input-field">
+              <label
+                className={isEditing.status === true && 'active'}
+                htmlFor="description"
+              >
+                Descrição
+            </label>
 
-          <div className="input-field">
-            <label htmlFor="category">Categoria</label>
-            <input
-              value={entry.category || ""}
-              name="category"
-              type="text"
-              id="category"
-              onChange={handleInputChange} />
-          </div>
-
-          <div className="row">
-            <div className="input-field col s6">
-              <label htmlFor="value">Valor</label>
-              <input className=""
-                value={entry.value || ""}
-                name="value"
-                type="number"
-                id="value"
+              <input
+                value={entry.description || ""}
+                name="description"
+                id="description"
+                type="text"
                 onChange={handleInputChange}
               />
             </div>
 
-            <div className="input-field col s6">
-              <label className="hide" htmlFor="date">Data</label>
+            <div className="col s12 input-field">
+              <label
+                className={isEditing.status === true && 'active'}
+                htmlFor="category"
+              >
+                Categoria
+              </label>
+
+              <input
+                value={entry.category || ""}
+                name="category"
+                type="text"
+                id="category"
+                onChange={handleInputChange}
+              />
+
+            </div>
+
+
+            <div className="col s12 m12 l6 input-field">
+              <label
+                className={isEditing.status === true && 'active'}
+                htmlFor="value"
+              >
+                Valor
+              </label>
+
+              <input
+                value={entry.value || ""}
+                name="value"
+                type="number"
+                id="value"
+                min="0"
+                step="0.01"
+                onChange={handleInputChange}
+              />
+            </div>
+
+            <div className="col s12 m12 l6 input-field">
+              <label
+                className="active"
+                htmlFor="date"
+              >
+                Data
+              </label>
               <input
                 value={entry.date}
                 name="date"
@@ -112,18 +138,21 @@ export default function Form({ onSubmit, isEditing }) {
                 type="date"
                 onChange={handleInputChange}
               />
+
             </div>
+
+          </div>
+          <div className="col s12">
+            <Button
+              className="btn waves-effect waves-teal right"
+              onClick={handleSubmit}
+            >
+              Salvar
+            </Button>
+
           </div>
 
         </div>
-
-        <Button
-          // className="modal-close"
-          onClick={handleSubmit}
-        >
-          Salvar
-        </Button>
-
       </form>
 
       <div className="modal-footer">
