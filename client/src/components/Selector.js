@@ -1,7 +1,6 @@
 import React from 'react';
 import Button from './Button';
 import Select from './Select';
-import './components.css';
 import Icon from './Icon';
 
 export default function Selector({ items, onChange }) {
@@ -29,7 +28,7 @@ export default function Selector({ items, onChange }) {
       </Button>
 
       <Select
-        className=""
+        className="browser-default _period-select"
         items={items}
         onChange={handleChange}
       />

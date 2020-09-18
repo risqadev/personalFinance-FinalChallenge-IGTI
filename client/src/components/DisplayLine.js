@@ -1,7 +1,5 @@
 import React from 'react';
 import DisplayField from './DisplayField';
-
-import 'materialize-css/dist/css/materialize.min.css';
 import { formatBRL } from '../helpers/formatter';
 
 export default function DisplayLine({ calculations, otherInfos }) {

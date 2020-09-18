@@ -1,5 +1,4 @@
 import React from 'react';
-import './components.css';
 // MATERIALIZE JAVASCRIPT CAUSOU PROBLEMA NA ATUALIZAÇÃO
 // import M from "materialize-css";
 
@@ -13,7 +12,7 @@ export default function Select({ className, items, onChange }) {
     <div className="input-field">
 
       <select
-        className={'browser-default _period-select' + className || ''}
+        className={className || ''}
         value={items.list[items.currentIndex]}
         // selectedIndex={items.currentIndex}
         onChange={onChange}
