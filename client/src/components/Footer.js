@@ -19,7 +19,7 @@ export default function Footer() {
   return (
     <div className="row _footer _semi-bold">
 
-      <div className="col s12 m6 l4">
+      <div className="col s12 m6 l4 _footer">
 
         <div className="row center">
           <span>
@@ -29,17 +29,17 @@ export default function Footer() {
 
         <div className="row center">
 
-          <div className="_logo">
+          <div className="">
             <a href={nodejsLink} target="_blank" rel="noopener noreferrer">
               <img className="col s4 center _tech-logo" src={nodeIcon} alt="Node js" />
             </a>
           </div>
-          <div className="_logo">
+          <div className="">
             <a href={reactLink} target="_blank" rel="noopener noreferrer">
               <img className="col s4 center" src={reactIcon} alt="React" />
             </a>
           </div>
-          <div className="_logo">
+          <div className="">
             <a href={mongodbLink} target="_blank" rel="noopener noreferrer">
               <img className="col s4 center" src={mongoIcon} alt="MongoDB" />
             </a>
@@ -49,7 +49,7 @@ export default function Footer() {
 
       </div>
 
-      <div className="col s12 m6 l4">
+      <div className="col s12 m6 l4 _footer">
 
         <div className="row center">
           <span>
@@ -62,13 +62,13 @@ export default function Footer() {
 
           <div className="">
             <a href={herokuLink} target="_blank" rel="noopener noreferrer">
-              <img className="col s3 offset-s2 center" src={herokuIcon} alt="heroku" />
+              <img className="col s4 offset-s2 center" src={herokuIcon} alt="heroku" />
             </a>
           </div>
 
           <div className="">
             <a href={githubLink} target="_blank" rel="noopener noreferrer">
-              <img className="col s3 offset-s2 center" src={githubIcon} alt="Github" />
+              <img className="col s4 offset-s0 center" src={githubIcon} alt="Github" />
             </a>
           </div>
 
@@ -77,7 +77,7 @@ export default function Footer() {
       </div>
 
 
-      <div className="col s12 m6 l4">
+      <div className="col s12 m6 l4 _footer">
 
         <div className="row center">
           <span>
