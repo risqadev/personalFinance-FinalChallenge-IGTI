@@ -1,3 +1,6 @@
+._semi-bold {
+  font-weight: 600;
+}
 
 ._period-selector {
   margin: 20px;
@@ -82,4 +85,55 @@
 
 ._type-radio {
   font-size: 1.3rem !important
+}
+
+._display-line {
+  border: 1px solid #26a69a;
+  border-radius: 3px;
+  padding: 5px 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+._display-field {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 1.1rem;
+  margin: auto;
+}
+
+._space-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+._flex-column {
+  display: flex;
+  flex-direction: column;
+  /* width: 30%; */
+  /* min-width: 300px; */
+}
+
+._row-wrap {
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+._footer {
+  margin-top: 30px;
+  font-size: 1.2rem;
+}
+
+._logo {
+  margin-top: auto;
+  margin-bottom: auto;
+  /* transform: scale(0.3); */
+  /* float: left; */
+  /* width: 7vw; */
+  /* object-fit: none; */
+  /* max-width: 250px;
+  margin-left: auto;
+  margin-right: auto; */
+  /* width: ; */
+  /* justify-content: center; */
 }

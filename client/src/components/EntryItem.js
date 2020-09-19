@@ -5,7 +5,7 @@ import Button from './Button';
 import Icon from './Icon';
 
 export default function EntryItem({ className, item, previousDay, onClick }) {
-  const { _id, day, type, description, value } = item;
+  const { _id, day, type, description, category, value } = item;
   const typeProps =
     (type === '+')
       ? { name: 'Receita', cssClass: '_income' }
@@ -25,7 +25,7 @@ export default function EntryItem({ className, item, previousDay, onClick }) {
       <div className="col _entry-day">{day}</div>
       <div className="col">
         <div className="_entry-description" >{description}</div>
-        <div className="_entry-type">{typeProps.name}</div>
+        <div className="_entry-type">{category}</div>
       </div>
       <div className="col _entry-value">{formatBRL(value)}</div>
 
@@ -41,7 +41,7 @@ export default function EntryItem({ className, item, previousDay, onClick }) {
       <Button
         id={_id}
         value="delete"
-        className="btn-flat waves-effect waves-teal red-text _action-icon"
+        className="btn-flat waves-effect waves-teal red-text text-darken-2 _action-icon"
         onClick={handleClick}
       >
         <Icon>delete</Icon>

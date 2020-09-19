@@ -6,6 +6,7 @@ import DisplayLine from './components/DisplayLine';
 import EntriesList from './components/EntriesList';
 import ModalReact from './components/ModalReact';
 import ActionSearch from './components/ActionSearch';
+import Footer from './components/Footer';
 
 
 export default function App() {
@@ -223,7 +224,7 @@ export default function App() {
   return (
     <div className="container">
       {/* <h2 className="center">Desafio Final do Bootcamp Full Stack</h2> */}
-      <h1 className="center">Gerenciador Financeiro</h1>
+      <h1 className="header center">Gerenciador Financeiro</h1>
 
       <Selector
         items={{
@@ -235,6 +236,7 @@ export default function App() {
       />
 
       <DisplayLine
+        className="row valign-wrapper _display-line"
         calculations={calculations}
         otherInfos
       />
@@ -259,11 +261,7 @@ export default function App() {
         items={filteredEntries}
         onClick={handleItemClick} />
 
-      {/* <Footer className="page-footer"> */}
-      <div className="page-footer">
-        <span className="page-footer footer-copyright">copyright</span>
-      </div>
-      {/* </Footer> */}
+      <Footer />
 
     </div>
   );
