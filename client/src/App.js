@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef, /* useCallback, useMemo, useReduce */ } from 'react';
-import M from "materialize-css";
+import React, { useState, useEffect, useRef } from 'react';
+import M from "materialize-css"
 import api from './services/api';
 import Selector from './components/Selector';
 import DisplayLine from './components/DisplayLine';
@@ -10,7 +10,6 @@ import Footer from './components/Footer';
 
 
 export default function App() {
-  console.log('App() excope');
 
   const today = new Date();
   const yyyy = String(today.getFullYear());
@@ -50,7 +49,6 @@ export default function App() {
           .sort((item, next) => item.day - next.day);
 
         periodEntries.current = entries;
-        // setPeriodEntries([...entries]);
 
         setFilteredEntries([...entries]);
       }
@@ -66,7 +64,6 @@ export default function App() {
       const cleanedEntries = periodEntries.current.filter(({ _id }) => _id !== id);
 
       periodEntries.current = cleanedEntries;
-      // setPeriodEntries([...cleanedEntries]);
 
       setFilteredEntries([...cleanedEntries]);
     } catch (error) {
@@ -87,7 +84,6 @@ export default function App() {
         entries.sort((item, next) => item.day - next.day);
 
         periodEntries.current = entries;
-        // setPeriodEntries([...entries]);
 
         setFilteredEntries([...entries]);
       }
@@ -186,16 +182,12 @@ export default function App() {
       );
 
       allPeriods.current = periods;
-      // setAllPeriods([periods]);
 
       periodEntries.current = entries;
-      // setPeriodEntries([...entries]);
 
       setFilteredEntries([...entries]);
 
-      // if (index !== currentPeriod.index) {
       setCurrentPeriod(currentPeriod);
-      // }
     };
 
     getPeriodEntries();
@@ -223,7 +215,7 @@ export default function App() {
 
   return (
     <div className="container">
-      {/* <h2 className="center">Desafio Final do Bootcamp Full Stack</h2> */}
+
       <h1 className="header center">Gerenciador Financeiro</h1>
 
       <Selector
@@ -240,8 +232,6 @@ export default function App() {
         calculations={calculations}
         otherInfos
       />
-
-      {/* <ActionsLine onSaveNew={handleSaveNew} onSearch={handleSearch} isEditing={isEditing} /> */}
 
       <div className="row">
 
