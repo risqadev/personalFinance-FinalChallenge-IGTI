@@ -1,6 +1,5 @@
 import React from 'react';
-// MATERIALIZE JAVASCRIPT CAUSOU PROBLEMA NA ATUALIZAÇÃO
-// import M from "materialize-css";
+
 
 const stringMonths = {
   1: 'Jan',
@@ -19,10 +18,6 @@ const stringMonths = {
 
 
 export default function Select({ className, items, onChange }) {
-  // MATERIALIZE JAVASCRIPT CAUSOU PROBLEMA NA ATUALIZAÇÃO
-  // React.useEffect(() => {
-  // M.AutoInit();
-  // }, []);
 
   return (
     <div className="input-field">
@@ -38,7 +33,6 @@ export default function Select({ className, items, onChange }) {
           const year = item.substring(0, 4);
           const month = stringMonths[Number(item.substring(5, 8))];
 
-          console.log(year, month)
 
           return (
 
