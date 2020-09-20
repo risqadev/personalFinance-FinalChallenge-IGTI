@@ -27,7 +27,6 @@ export default function Select({ className, items, onChange }) {
         value={items.list[items.currentIndex]}
         // selectedIndex={items.currentIndex}
         onChange={onChange}
-        style={{ fontFamily: 'Consolas, monospace' }}
       >
         {items.list.map((item, index) => {
           const year = item.substring(0, 4);

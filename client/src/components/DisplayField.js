@@ -1,8 +1,8 @@
 import React from 'react';
 
-export default function DisplayField({ classContainer, classLabel, classValue, description, value }) {
+export default function DisplayField({ classContainer, classLabel, classValue, styleContainer, description, value }) {
   return (
-    <div className={classContainer}>
+    <div className={classContainer} style={styleContainer}>
       <span
         className={classLabel}
       >

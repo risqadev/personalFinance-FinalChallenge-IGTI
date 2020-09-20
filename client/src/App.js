@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import M from "materialize-css"
+import M from "materialize-css";
 import api from './services/api';
 import Selector from './components/Selector';
 import DisplayLine from './components/DisplayLine';
@@ -19,7 +19,6 @@ export default function App() {
 
   const allPeriods = useRef([]);
   const periodEntries = useRef([]);
-  // const [periodEntries, setPeriodEntries] = useState([]);
   const isEditing = useRef({
     status: false,
     entry: {
@@ -228,9 +227,8 @@ export default function App() {
       />
 
       <DisplayLine
-        className="row valign-wrapper _display-line"
+        className="_display-line"
         calculations={calculations}
-        otherInfos
       />
 
       <div className="row">
