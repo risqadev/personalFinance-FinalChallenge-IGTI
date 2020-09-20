@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import M from "materialize-css";
 import api from './services/api';
+import normalizeAccentuation from './helpers/normalizeAccentuation';
 import Selector from './components/Selector';
 import DisplayLine from './components/DisplayLine';
 import EntriesList from './components/EntriesList';
@@ -156,12 +157,13 @@ export default function App() {
   }
 
   const handleSearch = ({ target: { value } }) => {
-    console.log('handleSearch ' + value);
-
     setSearchInput(value);
 
+    const valueToFind = normalizeAccentuation(value.toLowerCase());
+
     const filter = periodEntries.current.filter(entry =>
-      entry.description.includes(value)
+      normalizeAccentuation(entry.description.toLowerCase())
+        .includes(valueToFind)
     );
 
     setFilteredEntries([...filter]);
