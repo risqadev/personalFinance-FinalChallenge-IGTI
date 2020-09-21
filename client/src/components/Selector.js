@@ -28,7 +28,6 @@ export default function Selector({ items, onChange }) {
       </Button>
 
       <Select
-        className="browser-default _period-select"
         items={items}
         onChange={handleChange}
       />

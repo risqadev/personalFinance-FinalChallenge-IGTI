@@ -217,7 +217,9 @@ export default function App() {
   return (
     <div className="container">
 
-      <h1 className="header center">Gerenciador Financeiro</h1>
+      <h1 className="header center">
+        Gerenciador Financeiro Pessoal
+      </h1>
 
       <Selector
         items={{
@@ -233,23 +235,26 @@ export default function App() {
         calculations={calculations}
       />
 
-      <div className="row">
+      <div className="row _actions-line">
 
         <ModalReact
-          buttonClasses="btn waves-effect waves-light col s12 m6 l4 _btn"
+          buttonClasses="btn waves-effect waves-light col s12 m6 l4 input-field _btn"
           isEditing={isEditing.current} onSave={handleSave}
           openModal={openModal} closeModal={closeModal}
-          modalIsOpen={modalIsOpen} setIsOpen={setIsOpen} />
+          modalIsOpen={modalIsOpen} setIsOpen={setIsOpen}
+        />
 
         <ActionSearch
           className="col s12 m6 l8 input-field"
-          searchInput={searchInput} onChange={handleSearch} />
+          searchInput={searchInput} onChange={handleSearch}
+        />
 
       </div>
 
       <EntriesList
         items={filteredEntries}
-        onClick={handleItemClick} />
+        onClick={handleItemClick}
+      />
 
       <Footer />
 

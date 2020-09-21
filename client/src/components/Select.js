@@ -20,34 +20,30 @@ const stringMonths = {
 export default function Select({ className, items, onChange }) {
 
   return (
-    <div className="input-field">
-
-      <select
-        className={className || ''}
-        value={items.list[items.currentIndex]}
-        // selectedIndex={items.currentIndex}
-        onChange={onChange}
-      >
-        {items.list.map((item, index) => {
-          const year = item.substring(0, 4);
-          const month = stringMonths[Number(item.substring(5, 8))];
+    <select
+      className={['browser-default _period-select', className].join(' ')}
+      value={items.list[items.currentIndex]}
+      // selectedIndex={items.currentIndex}
+      onChange={onChange}
+    >
+      {items.list.map((item, index) => {
+        const year = item.substring(0, 4);
+        const month = stringMonths[Number(item.substring(5, 8))];
 
 
-          return (
+        return (
 
-            <option
-              key={index}
-              value={item}
-              style={{ fontFamily: 'Consolas, monospace' }}
-            // selected={index === items.currentIndex}
-            >
-              {`${month}/${year}`}
-            </option>
+          <option
+            key={index}
+            value={item}
+            style={{ fontFamily: 'Consolas, monospace' }}
+          // selected={index === items.currentIndex}
+          >
+            {`${month}/${year}`}
+          </option>
 
-          )
-        })}
-      </select>
-
-    </div>
+        )
+      })}
+    </select>
   )
 }
